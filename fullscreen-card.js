@@ -22,6 +22,12 @@ class FullscreenCard extends HTMLElement {
       this.tag.style.borderRadius = "var(--ha-card-border-radius, 4px)";
       this.tag.style.cursor = "pointer";
 
+      addEventListener("fullscreenchange", () => {
+        if (!document.fullscreenElement && this.content.style.display) {
+          this.content.style.display = ""
+        }
+      });
+
       const toggleFullscreen = async () => {
         if (window["fullScreen"] || document.fullscreenElement) {
           await document.exitFullscreen();
@@ -31,6 +37,9 @@ class FullscreenCard extends HTMLElement {
           await document.documentElement.requestFullscreen();
           this.tag.innerHTML =
             this.config["exit_fullscreen"] || "Exit fullscreen";
+          if (this.config["hide_button_when_fullscreen"]) {
+            this.content.style.display = "none"
+          }
         }
       };
       this.tag.onclick = toggleFullscreen;

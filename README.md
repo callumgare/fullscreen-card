@@ -16,4 +16,5 @@ Make your Home Assistant browser fullscreen.
 type: "custom:fullscreen-card"
 go_fullscreen: "enter fullscreen"
 exit_fullscreen: "exit fullscreen"
+hide_button_when_fullscreen: true
 ```
